@@ -31,5 +31,5 @@ This is a backend system for managing products and categories, built using the *
 1. **Clone the repo**
 
 ```bash
-git clone https://github.com/your-username/product-inventory-graphql.git
+git clone https://github.com/Kartik098/product-inventory-graphql.git
 cd product-inventory-graphql
