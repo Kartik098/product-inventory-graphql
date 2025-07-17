@@ -4,6 +4,16 @@ const { Op } = require("sequelize");
 
 module.exports = {
   Query: {
+    product: async (_, { id }) => {
+  const product = await Product.findByPk(id, {
+    include: {
+      model: Category,
+      through: { attributes: [] },
+    },
+  });
+  if (!product) throw new Error("Product not found");
+  return product;
+},
     products: async (_, { page = 1, limit = 10, search, categoryIds }) => {
   const offset = (page - 1) * limit;
   const whereClause = {};
@@ -43,8 +53,8 @@ module.exports = {
 
   Mutation: {
     addProduct: async (_, { input }) => {
-      const { name, description, quantity, categoryIds } = input;
- if (!name || !description || quantity == null) {
+      const { name, description, quantity, categoryIds, price } = input;
+ if (!name || !description || quantity == null || price == null) {
     throw new Error("All fields except categories are required.");
   }
       // Check if name already exists
@@ -53,7 +63,7 @@ module.exports = {
         throw new Error("Product with this name already exists");
       }
 
-      const product = await Product.create({ name, description, quantity });
+      const product = await Product.create({ name, description, quantity, price });
 
       if (categoryIds && categoryIds.length > 0) {
         await product.setCategories(categoryIds);
@@ -62,7 +72,7 @@ module.exports = {
       return product;
     },
     updateProduct: async (_, { id, input }) => {
-  const { name, description, quantity, categoryIds } = input;
+  const { name, description, quantity, categoryIds, price } = input;
         
   // Check if product exists
   const product = await Product.findByPk(id);
@@ -75,7 +85,7 @@ module.exports = {
   }
 
   // Update basic fields
-  await product.update({ name, description, quantity });
+  await product.update({ name, description, quantity, price });
 
   // Update categories
   if (categoryIds && categoryIds.length > 0) {

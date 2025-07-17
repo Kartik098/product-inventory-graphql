@@ -10,6 +10,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       defaultValue: 0,
     },
+    price: {
+      type: DataTypes.FLOAT,
+      defaultValue: 0,
+    },
   });
   return Product;
 };

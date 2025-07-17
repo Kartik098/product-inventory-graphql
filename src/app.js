@@ -16,6 +16,7 @@ async function startServer() {
   });
   await server.start();
   server.applyMiddleware({ app });
+// Somewhere in your entry point or seed script
 
   db.sequelize.sync().then(() => {
     app.listen(process.env.PORT, () => {

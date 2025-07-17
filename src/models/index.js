@@ -1,7 +1,12 @@
 // src/models/index.js
 const { Sequelize } = require("sequelize");
 require("dotenv").config();
-
+console.log("Connecting to DB with config:");
+console.log({
+  db: process.env.DB_NAME,
+  user: process.env.DB_USER,
+  pass: process.env.DB_PASSWORD,
+});
 const sequelize = new Sequelize(
   process.env.DB_NAME,
   process.env.DB_USER,
