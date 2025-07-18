@@ -1,10 +1,16 @@
-# 🛍️ Product Inventory System - GraphQL API (Node.js + MySQL)
+# 🛍️ Product Inventory System - Fullstack (GraphQL API + React Frontend)
 
-This is a backend system for managing products and categories, built using the **Node.js + GraphQL** stack with **Sequelize** ORM and **MySQL** database.
+A fullstack inventory management system built with:
+
+- **Node.js + Express + GraphQL** for the backend (inside `src/`)
+- **React + Apollo Client** frontend (inside `frontend/`)
+- **MySQL** as the database
 
 ---
 
 ## 🔧 Features
+
+### ✅ Backend
 
 - Create, update, delete products
 - Assign multiple categories to a product
@@ -13,51 +19,76 @@ This is a backend system for managing products and categories, built using the *
 - Paginated product listing
 - Fully validated with error handling
 
+### ✅ Frontend
+
+- Product listing with pagination
+- Category-based filtering
+- Search bar with manual "Search" trigger
+- Product creation, update, and deletion
+- Built with React and Apollo Client
+
 ---
 
-## 📦 Tech Stack
+## 📁 Project Structure
 
-- Node.js
-- Express
-- GraphQL (Apollo Server / express-graphql)
-- Sequelize
-- MySQL
-- dotenv
+product-inventory-graphql/
+│
+├── frontend/ # React frontend
+│ ├── src/
+│ └── ...
+│
+├── src/ # Node.js backend source code
+│ ├── models/
+│ ├── resolvers/
+│ ├── schema/
+│ └── ...
+├── seed/
+│ └── seedCategories.js # Initial category seeding script
+├── .env.example
+├── app.js
+└── package.json
+
+yaml
+
 
 ---
 
 ## 🚀 Setup Instructions
 
-1. **Clone the repo**
+### 1. **Clone the repo**
 
 ```bash
 git clone https://github.com/Kartik098/product-inventory-graphql.git
 cd product-inventory-graphql
-
-Install dependencies
-
+2. Backend Setup
+bash
 
 npm install
-Create .env file
+Create a .env file using .env.example
 
-Create a .env using the values from env.example.
+Set up your MySQL database (e.g. inventory_db)
 
-Set up the database
-
-Use MySQL Workbench to create the database (e.g. inventory_db)
-
-Run the seed script to insert default categories:
+Seed initial categories:
 
 bash
 
 node src/seed/seedCategories.js
-Run the server
+Run the backend server:
 
 bash
 
 node src/app.js
-The server will be available at:
+Backend runs at:
 ➡️ http://localhost:4000/graphql
+
+3. Frontend Setup
+bash
+
+cd frontend
+npm install
+npm run dev
+Frontend runs at:
+➡️ http://localhost:5173
 
 🔍 Sample GraphQL Queries
 📌 Get Products with Filters
@@ -113,5 +144,4 @@ mutation {
 }
 👨‍💻 Author
 Kartik Gupta
-
-
+Built with ❤️ using GraphQL, React, and MySQL
