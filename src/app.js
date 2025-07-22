@@ -1,26 +1,25 @@
 const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
 const db = require('./models');
+const path = require('path');
 const typeDefs = require('./graphql/schema');
 const resolvers = require('./graphql/resolvers');
-
 require('dotenv').config();
+const PORT = process.env.PORT || 3000;
 
 const app = express();
 
 
+// React SPA fallback
+
 async function startServer() {
-  const server = new ApolloServer({
-    typeDefs,
-    resolvers,
-  });
+  const server = new ApolloServer({ typeDefs, resolvers });
   await server.start();
   server.applyMiddleware({ app });
-// Somewhere in your entry point or seed script
 
   db.sequelize.sync({ alter: true }).then(() => {
-    app.listen(process.env.PORT, () => {
-      console.log(`🚀 Server running at http://localhost:${process.env.PORT}${server.graphqlPath}`);
+    app.listen(PORT, () => {
+      console.log(`🚀 Server running at http://localhost:${PORT}${server.graphqlPath}`);
     });
   });
 }
