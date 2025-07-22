@@ -18,7 +18,7 @@ async function startServer() {
   server.applyMiddleware({ app });
 // Somewhere in your entry point or seed script
 
-  db.sequelize.sync().then(() => {
+  db.sequelize.sync({ alter: true }).then(() => {
     app.listen(process.env.PORT, () => {
       console.log(`🚀 Server running at http://localhost:${process.env.PORT}${server.graphqlPath}`);
     });
